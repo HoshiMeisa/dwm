@@ -64,6 +64,7 @@ static const char *pycharm[]  = { "pycharm", NULL };
 static const char *fcitx[]  = { "clash", NULL };
 static const char *clash[]  = { "fcitx", NULL };
 static const char *flameshot[]  = { "flameshot", "gui", NULL };
+static const char *vscode[] = { "vscode", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -74,6 +75,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = pycharm } },
 	{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = clash } },
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          {.v = fcitx } },
+	{ MODKEY,			XK_v,	   spawn,	   {.v = vscode } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
