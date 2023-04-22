@@ -9,6 +9,11 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
+export JAVA_HOME=/home/kana/Software/jre1.8.0_351
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
+
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -39,36 +44,54 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  done
  unset f
 fi
-
-DIR=${HOME}/.dwm
- 
-if [ -f "${DIR}"/dwmrc ]; then
- 
-/bin/sh "${DIR}"/dwmrc &
- 
-else
  
 while true; do
  
 BAT=$(cat /sys/class/power_supply/BAT0/capacity)
 VOL=$( amixer get Master | tail -1 | awk '{print $4}' )
 MemAva=$(free -h | grep 'Mem' | awk '{print $7}')
-CPUUs=$(top -bn 1 -i -c | grep '%Cpu(s)' | awk '{print $2}')
+#CPUUs=$(top -bn 1 -i -c | grep '%Cpu(s)' | awk '{print $2}')
+wlan0=$(ifconfig wlan0 | grep "inet" | awk '{print $2}' | awk 'NR==1')
+eno1=$(ifconfig eno1 | grep "inet" | awk '{print $2}' | awk 'NR==1')
+eth0=$(ifconfig enp6s0f4u2c4i2 | grep "inet" | awk '{print $2}' | awk 'NR==1')
+enp6s0f4u2c4i2=$(ifconfig enp6s0f4u2c4i2 | grep "inet" | awk '{print $2}' | awk 'NR==1')
 
-xsetroot -name " VOL$VOL BAT[$BAT%] CPU[$CPUUs%] MEM[$MemAva] | $(date +"%F") $(date +"%H:%M") "
-sleep 1s 
- 
-done &
- 
+net=$(echo N/A)
+[ $wlan0 ] && net=$(echo wlan0)
+[ $eno1 ] && net=$(echo eno1)
+[ $eth0 ] && net=$(echo eth0)
+[ $wlan0 ] && [ $eth0 ] && net=$(echo wlan0/eth0)
+[ $wlan0 ] && [ $eno1 ] && net=$(echo wlan0/eno1)
+[ $eno1 ] && [ $enp6s0f4u2c4i2 ] && net=$(echo eno1/eth0)
+[ $wlan0 ] && [ $enp6s0f4u2c4i2 ] && [ $eno1 ] && net=$(echo wlan0/eno1/eth0 )
+
+status=$(cat /sys/class/power_supply/BAT0/status)
+
+
+if [[ "$status" == "Not charging" || "$status" == "Charging" || "$status" == "Full" ]]; then
+	BATC=$(echo [C]) 
+else
+	BATC=$(echo)
 fi
 
+
+xsetroot -name " VOL$VOL BAT[$BAT%]$BATC MEM[$MemAva] NET[$net] | $(date +"%F") $(date +"%H:%M") "
+amixer set -c 1 Master 0 
+sleep 1s  
+done &
+
+
 #imwheel &
-#clash &
-/home/kana/Software/Clash\ for\ Windows-0.20.2-x64-linux/cfw &
+wmname LG3D &
+clash &
 fcitx-autostart &
 fcitx &
-#xrandr --output HDMI-0 --mode 1920x1080 --rate 74.99 &                                                                                      (base) 19:33:15
+#xrandr --output HDMI-0 --mode 1920x1080 --rate 74.9
 xrandr --output DP-4 --mode 2560x1600 --rate 165 &
-redshift -P -O 5000K -b 0.4 &
-
+redshift -P -O 5000K -b 0.35 & 
+bluetoothctl power on &
+dunst &
+xmodmap ~/.Xmodmap & 
+#blueman-manager &
+amixer set -c 1 Master 0 & 
 exec dwm
