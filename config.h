@@ -73,6 +73,7 @@ static const char *flameshot[]  = { "flameshot", "gui", NULL };
 static const char *vscode[] = { "code", NULL };
 static const char *edge[] = { "microsoft-edge-stable", NULL };
 static const char *dataspell[] = { "dataspell", NULL };
+static const char *renet[] = { "renet", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -81,10 +82,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_g,      spawn,          {.v = chrome } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = pycharm } },
-    { MODKEY,                       XK_o,      spawn,          {.v = dataspell } },
+    { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dataspell } },
 	{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = clash } },
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          {.v = fcitx } },
-	{ MODKEY,			XK_v,	   spawn,	   {.v = vscode } },
+    { MODKEY|ShiftMask,             XK_n,      spawn,          {.v = renet } },
+	{ MODKEY,			            XK_v,	   spawn,	       {.v = vscode } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = edge } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
