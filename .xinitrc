@@ -16,10 +16,16 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME=/usr/lib/jvm/default
 export PATH=$PATH:$JAVA_HOME/bin
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
 
 
 # CUDA
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
+
+export LIBVA_DRIVER_NAME=vdpau
+
+export LD_PRELOAD=/usr/lib/libstdc++.so.6
 
 
 # Merge in Defaults and Keymaps
@@ -54,6 +60,7 @@ while true; do
 BAT=$(cat /sys/class/power_supply/BAT0/capacity)
 VOL=$( amixer get Master | tail -1 | awk '{print $4}')
 MemAva=$(free -h | grep 'Mem' | awk '{print $7}')
+WEEK=$(LC_TIME=ja_JP.UTF-8 date '+%A' | awk '{print substr($0, 1, 1)}')
 
 wlan0=$(ifconfig wlan0 | grep "inet" | awk '{print $2}' | awk 'NR==1')
 eno1=$(ifconfig eno1 | grep "inet" | awk '{print $2}' | awk 'NR==1')
@@ -74,10 +81,10 @@ status=$(cat /sys/class/power_supply/BAT0/status)
 if [[ "$status" == "Not charging" || "$status" == "Charging" || "$status" == "Full" ]]; then
 	BATC=$(echo [C]) 
 else
-	BATC=$(echo)
+	BATC=$(echo )
 fi
 
-xsetroot -name " VOL$VOL BAT[$BAT%]$BATC MEM[$MemAva] NET[$net] | $(date +"%F") $(date +"%H:%M") "
+xsetroot -name " VOL$VOL BAT[$BAT%]$BATC MEM[$MemAva] NET[$net] | $(date +"%F")($WEEK) $(date +"%H:%M") "
 amixer set -c 1 Master 0   # Keep Quiet
 sleep 1s  
 done &
@@ -102,5 +109,7 @@ bluetoothctl power on &
 dunst &
 xmodmap ~/.Xmodmap & 
 #blueman-manager &
-amixer set -c 1 Master 0 & 
+#amixer set -c 1 Master 0 & 
 exec dwm
+#export DESKTOP_SESSION=plasma
+#exec startplasma-x11
