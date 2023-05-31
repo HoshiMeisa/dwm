@@ -4,6 +4,7 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 
+
 # Fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
