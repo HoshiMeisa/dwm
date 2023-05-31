@@ -87,7 +87,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          {.v = fcitx } },
     { MODKEY|ShiftMask,             XK_n,      spawn,          {.v = renet } },
 	{ MODKEY,			            XK_v,	   spawn,	       {.v = vscode } },
-	{ MODKEY,                       XK_e,      spawn,          {.v = edge } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
