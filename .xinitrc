@@ -4,7 +4,6 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 
-
 # Fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -98,14 +97,15 @@ sudo systemctl start vmware-networks.service  vmware-usbarbitrator.service &
 
 # Auto-Run SOftwares
 #imwheel &
+picom --config ~/.config/picom/picom.conf &
 #picom -b &
 wmname LG3D &
 clash &
 fcitx-autostart &
 fcitx &
-#xrandr --output HDMI-0 --mode 1920x1080 --rate 74.9
+xrandr --output HDMI-0 --primary --mode 1920x1080 --rate 75 &
 xrandr --output DP-4 --mode 2560x1600 --rate 165 &
-redshift -P -O 5000K -b 0.4 & 
+redshift -P -O 5500K -b 0.4 & 
 bluetoothctl power on &
 dunst &
 xmodmap ~/.Xmodmap & 
