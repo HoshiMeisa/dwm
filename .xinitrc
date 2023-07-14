@@ -4,11 +4,15 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 
-# Fcitx
+# Fcitx4
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
+# Fcitx5
+#export GTK_IM_MODULE=fcitx5
+#export QT_IM_MODULE=fcitx5
+#export XMODIFIERS="@im=fcitx5"
 
 # Java
 export JAVA_HOME=/home/kana/Software/jre1.8.0_351
@@ -69,6 +73,25 @@ wlan0=$(ifconfig wlan0 | grep "inet" | awk '{print $2}' | awk 'NR==1')
 eno1=$(ifconfig eno1 | grep "inet" | awk '{print $2}' | awk 'NR==1')
 eth0=$(ifconfig enp6s0f4u2c4i2 | grep "inet" | awk '{print $2}' | awk 'NR==1')
 enp6s0f4u2c4i2=$(ifconfig enp6s0f4u2c4i2 | grep "inet" | awk '{print $2}' | awk 'NR==1')
+#clipb=$(xclip -selection clipboard | cut -c 1-9)
+
+
+
+# 使用xclip命令获取剪贴板内容
+clipboard_content=$(xclip -selection clipboard -o 2>/dev/null)
+
+# 将内容重新放回剪切板
+echo -n "$clipboard_content" | xclip -selection clipboard
+
+# 判断剪贴板是否有内容
+if [ -z "$clipboard_content" ]; then
+    # 如果剪贴板没有内容，就将字符串“No any”赋值给clip
+    clipb="N/A"
+else
+    # 使用tr命令将换行符替换为空格，再使用cut命令处理并赋值给clip
+    clipb=$(echo "$clipboard_content" | tr '\n' ' ' | cut -c 1-9)
+fi
+
 
 net=$(echo N/A)
 [ $wlan0 ] && net=$(echo wlan0)
@@ -87,7 +110,7 @@ else
 	BATC=$(echo )
 fi
 
-xsetroot -name " VOL$VOL BAT[$BAT%]$BATC MEM[$MemAva] NET[$net] | $(date +"%F")($WEEK) $(date +"%H:%M") "
+xsetroot -name "   VOL$VOL   BAT[$BAT%]$BATC   MEA[$MemAva]   NET[$net]   CLB[$clipb]   |   $(date +"%F") ($WEEK)   $(date +"%H:%M")   "
 amixer set -c 1 Master 0   # Keep Quiet
 sleep 1s  
 done &
@@ -96,6 +119,10 @@ done &
 # VMWare Services
 sudo systemctl enable vmware-networks.service  vmware-usbarbitrator.service &
 sudo systemctl start vmware-networks.service  vmware-usbarbitrator.service &
+
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 310 1
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 281 1
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 292 0.4
 
 
 # Auto-Run SOftwares
