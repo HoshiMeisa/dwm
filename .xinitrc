@@ -124,7 +124,7 @@ while true; do
 done &
 
 
-# Auto-Run SOftwares
+# Auto-Start
 picom --config ~/.config/picom/picom.conf &
 wmname LG3D &
 clash &
