@@ -80,7 +80,7 @@ while true; do
     battery=$(cat /sys/class/power_supply/BAT0/capacity)
     battery_status=$(cat /sys/class/power_supply/BAT0/status)
     if [[ "$battery_status" == "Not charging" || "$battery_status" == "Charging" || "$battery_status" == "Full" ]]; then
-        is_charging=$(echo [C])
+        is_charging=$(echo /C)
     else
         is_charging=$(echo )
     fi
@@ -116,7 +116,7 @@ while true; do
     # Date
     week_jp=$(LC_TIME=ja_JP.UTF-8 date '+%A' | awk '{print substr($0, 1, 1)}')
 
-    xsetroot -name " BAT[$battery%]$is_charging NET[$net] CPU[$cpu_use/$cpu_memory_free/$cpu_temp°C] GPU[$gpu_use/$gpu_memory_free/$gpu_temp°C] | $(date +"%F")($week_jp) $(date +"%H:%M") "
+    xsetroot -name " BAT[$battery%$is_charging] NET[$net] CPU[$cpu_use/$cpu_memory_free/$cpu_temp°C] GPU[$gpu_use/$gpu_memory_free/$gpu_temp°C] | $(date +"%F")($week_jp) $(date +"%H:%M") "
 
     amixer set -c 1 Master 0   # Keep Quiet
 
