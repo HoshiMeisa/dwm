@@ -80,7 +80,7 @@ while true; do
     battery=$(cat /sys/class/power_supply/BAT0/capacity)
     battery_status=$(cat /sys/class/power_supply/BAT0/status)
     if [[ "$battery_status" == "Not charging" || "$battery_status" == "Charging" || "$battery_status" == "Full" ]]; then
-        is_charging=$(echo /C)
+        is_charging=$(echo [C])
     else
         is_charging=$(echo )
     fi
@@ -113,14 +113,25 @@ while true; do
     [ $eno1 ] && [ $enp6s0f4u2c4i2 ] && net=$(echo eno1/eth0)
     [ $wlan0 ] && [ $enp6s0f4u2c4i2 ] && [ $eno1 ] && net=$(echo wlan0/eno1/eth0 )
 
+    interface="wlan0"
+    RX1=$(ifconfig $interface | grep "RX packets" | awk '{print $5}')
+    TX1=$(ifconfig $interface | grep "TX packets" | awk '{print $5}')
+    sleep 0.1
+    RX2=$(ifconfig $interface | grep "RX packets" | awk '{print $5}')
+    TX2=$(ifconfig $interface | grep "TX packets" | awk '{print $5}')
+    RX_SPEED=$(echo "scale=2; ($RX2 - $RX1) / 1048576 * 10" | bc)
+    TX_SPEED=$(echo "scale=2; ($TX2 - $TX1) / 1048576 * 10" | bc)
+    RX_SPEED=$(printf "%.2f" $RX_SPEED)
+    TX_SPEED=$(printf "%.2f" $TX_SPEED)
+
     # Date
     week_jp=$(LC_TIME=ja_JP.UTF-8 date '+%A' | awk '{print substr($0, 1, 1)}')
 
-    xsetroot -name " BAT[$battery%$is_charging] NET[$net] CPU[$cpu_use/$cpu_memory_free/$cpu_temp°C] GPU[$gpu_use/$gpu_memory_free/$gpu_temp°C] | $(date +"%F")($week_jp) $(date +"%H:%M") "
+    xsetroot -name " BAT[$battery%]$is_charging NET[$net][${RX_SPEED}M/s][${TX_SPEED}M/s] CPU[$cpu_use][$cpu_memory_free][$cpu_temp°C] GPU[$gpu_use][$gpu_memory_free][$gpu_temp°C] | $(date +"%F")($week_jp) $(date +"%H:%M") "
 
     amixer set -c 1 Master 0   # Keep Quiet
 
-    sleep 1s
+    sleep 0.9
 done &
 
 
