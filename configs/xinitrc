@@ -121,8 +121,8 @@ while true; do
     TX2=$(ifconfig $interface | grep "TX packets" | awk '{print $5}')
     RX_SPEED=$(echo "scale=2; ($RX2 - $RX1) / 1048576 * 10" | bc)
     TX_SPEED=$(echo "scale=2; ($TX2 - $TX1) / 1048576 * 10" | bc)
-    RX_SPEED=$(printf "%.2f" $RX_SPEED)
-    TX_SPEED=$(printf "%.2f" $TX_SPEED)
+    RX_SPEED=$(printf "%.1f" $RX_SPEED)
+    TX_SPEED=$(printf "%.1f" $TX_SPEED)
 
     # Date
     week_jp=$(LC_TIME=ja_JP.UTF-8 date '+%A' | awk '{print substr($0, 1, 1)}')

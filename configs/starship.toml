@@ -1,0 +1,158 @@
+# Disable the blank line at the start of the prompt
+add_newline = true
+
+# Which is equivalent to
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$conda\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[>](bold green)'
+error_symbol = '[>](red)'
+
+[conda]
+ignore_base = false
+symbol = ' '
+format = 'via [$symbol$environment]($style) '
+
+
+[time]
+disabled = true
+format = '[\[ $time \]]($style) '
+time_format = '%T'
+utc_time_offset = '+8'
+time_range = '10:00:00-14:00:00'
+
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = 'KanaMeisa($style)  '
+disabled = false
+show_always = true
+
+[cmd_duration]
+format = 'took [$duration]($style) '
+
+[php]
+symbol = ' '
+
+[git_branch]
+always_show_remote = true
+
+[python]
+style = 'bold green'
+format = '[${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+
+[battery]
+disabled = false
+
+[[battery.display]]
+threshold = 95
+style = 'white'
+
+[rlang]
+format = 'with [ $version](blue bold) '
+
+[c]
+symbol = ' '
+detect_extensions = ['c', 'h', 'cpp']
+
+[docker_context]
+symbol = ' '
+only_with_files	= false
+disabled = false
+
+[java]
+format = 'via [${symbol}(${version} )]($style)'
+style = 'red'
+symbol = '󰬷($style) '
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '
+read_only = '󱅞 '
+

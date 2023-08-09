@@ -2,13 +2,20 @@
 window:
   #rounded_corners: 10
   # decorations: "none"
-    dimensions:
-      columns: 120
-      lines: 30
+  #dimensions:
+  #columns: 120
+  #lines: 30
+  startup_mode: Maximized
+  padding: 
+    x: 2
+    y: 2
+
 # 透明度
-    opacity: 1
+  opacity: 1
 # 实时重载配置文件，不用重启测试配置选项
 live_config_reload: true
+
+
 # 主题
 colors:
   primary:
@@ -49,3 +56,4 @@ font:
     y: 0
 cursor:
   style: Beam
+  blinking: On
