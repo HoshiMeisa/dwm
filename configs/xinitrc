@@ -147,7 +147,7 @@ redshift -P -O 5500K -b 0.3 &
 bluetoothctl power on &
 dunst &
 xmodmap ~/.Xmodmap & 
+~/dwm/configs/rp.sh &
 #blueman-manager &
-
 
 exec dwm
