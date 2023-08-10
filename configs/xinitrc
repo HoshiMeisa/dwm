@@ -113,7 +113,7 @@ while true; do
     [ $eno1 ] && [ $enp6s0f4u2c4i2 ] && net=$(echo eno1/eth0)
     [ $wlan0 ] && [ $enp6s0f4u2c4i2 ] && [ $eno1 ] && net=$(echo wlan0/eno1/eth0 )
 
-    interface="wlan0"
+    interface=$net
     RX1=$(ifconfig $interface | grep "RX packets" | awk '{print $5}')
     TX1=$(ifconfig $interface | grep "TX packets" | awk '{print $5}')
     sleep 0.1
