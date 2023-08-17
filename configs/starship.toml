@@ -140,7 +140,7 @@ format = 'with [ $version](blue bold) '
 
 [c]
 symbol = ' '
-detect_extensions = ['c', 'h', 'cpp']
+detect_extensions = ["c", "h", "cc", "cpp", "hh", "hpp"]
 
 [docker_context]
 symbol = ' '
@@ -156,3 +156,5 @@ symbol = '󰬷($style) '
 format = '[$path]($style)[$read_only]($read_only_style) '
 read_only = '󱅞 '
 
+[golang]
+symbol = ' '
