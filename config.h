@@ -83,6 +83,7 @@ static const char *dataspell[] = { "dataspell", NULL };
 static const char *renet[] = { "renet", NULL };
 static const char *i3lock[] = { "i3lock", NULL };
 static const char *firefox[] = { "firefox", NULL };
+static const char *clion[] = { "clion", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -98,7 +99,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = i3lock } },
 	{ MODKEY,			            XK_v,	   spawn,	       {.v = vscode } },
     { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = firefox } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+    { MODKEY,                       XK_c,      spawn,          {.v = clion} },
+    { MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
