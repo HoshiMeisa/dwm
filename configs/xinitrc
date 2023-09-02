@@ -141,8 +141,8 @@ wmname LG3D &
 clash &
 fcitx-autostart &
 fcitx &
-xrandr --output HDMI-0 --primary --mode 1920x1080 --rate 75 &
-xrandr --output DP-4 --mode 2560x1600 --rate 165 &
+xrandr --output HDMI-0 --mode 1920x1080 --rate 75 &
+xrandr --output DP-4 --primary --mode 2560x1600 --rate 165 &
 redshift -P -O 5500K -b 0.3 & 
 bluetoothctl power on &
 dunst &
