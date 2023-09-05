@@ -63,6 +63,10 @@ export LD_PRELOAD=/usr/lib/libstdc++.so.6
 export PATH=/opt/cuda/bin:$PATH
 
 
+# Vue
+export /home/kana/npm/node_global/lib/node_modules
+
+
 # VMWare Services
 sudo systemctl enable vmware-networks.service  vmware-usbarbitrator.service &
 sudo systemctl start vmware-networks.service  vmware-usbarbitrator.service &
