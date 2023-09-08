@@ -10,7 +10,9 @@ set -gx PATH $EMSDK $PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /home/kana/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+if test -f /home/kana/anaconda3/bin/conda
+    eval /home/kana/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
 # <<< conda initialize <<<
 
 thefuck --alias | source
