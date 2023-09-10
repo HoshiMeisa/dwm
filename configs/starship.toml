@@ -126,7 +126,7 @@ always_show_remote = true
 [python]
 style = 'bold green'
 format = '[${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-
+detect_extensions = ['py', 'ipynb']
 
 [battery]
 disabled = false
