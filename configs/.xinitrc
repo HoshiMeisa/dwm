@@ -29,7 +29,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-
 # Fcitx4
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -73,9 +72,9 @@ sudo systemctl start vmware-networks.service  vmware-usbarbitrator.service &
 
 
 # Touchpad Settings
-xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 310 1
-xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 281 1
-xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" 292 0.4
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Tapping Enabled" 1
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Accel Speed" 0.45
 
 
 # Xsetroot Bar
@@ -151,7 +150,7 @@ redshift -P -O 5500K -b 0.3 &
 bluetoothctl power on &
 dunst &
 xmodmap ~/.Xmodmap & 
-~/dwm/configs/rp.sh &
+#~/dwm/configs/rp.sh &
 #blueman-manager &
 
 exec dwm
