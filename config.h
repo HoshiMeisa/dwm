@@ -78,7 +78,6 @@ static const char *pycharm[]  = { "pycharm", NULL };
 static const char *clash[]  = { "cfw", NULL };
 static const char *flameshot[]  = { "flameshot", "gui", NULL };
 static const char *vscode[] = { "code", NULL };
-//static const char *edge[] = { "microsoft-edge-stable", NULL };
 static const char *dataspell[] = { "dataspell", NULL };
 static const char *renet[] = { "renet", NULL };
 static const char *i3lock[] = { "i3lock", NULL };
